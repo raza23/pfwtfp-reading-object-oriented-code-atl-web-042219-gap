@@ -9,6 +9,8 @@
 
 ## Introduction
 
+**Details pending Flatiron Process**
+
 - Being able to read and interpret code that we haven’t written is a critical skill to learning how to write good code. It's also a critical skill on the job!
 - Imagine you're an engineer and have been tasked with adding a feature to an existing project. You open a copy of the project on your computer and find thousands of lines of code in many dozens of files. Where to start? It can be overwhelming! Well, using the Flatiron process, we can approach existing, unfamiliar code in a systematic way.
 
