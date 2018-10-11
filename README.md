@@ -1,107 +1,82 @@
-# Reading Complex Code
-
-“Meaning lies as much
-in the mind of the reader
-as in the Haiku.”
-― Douglas R. Hofstadter
+# Reading Object Oriented Code
 
 ## Learning Goals
 
-- Identify methods for interpreting unfamiliar code
-- Identify inputs of a function
-- Identify outputs of a function
-- Distinguish separate actions within an existing function
-- Infer relationships between functions
+- Recognize how process for unfamiliar code can be used with classes in Ruby
+- Apply process to example class
 
 ## Introduction
 
-Being able to approach and understand code that we are unfamiliar with is a
-critical programming skill. Imagine you've landed a job as an engineer. You've
-joined a team thats already working on a project and your task is to add a
-feature. You've cloned the project to your local machine and open it up... to
-find thousands of lines of code in dozens of files. Where do you begin? It's
-like a giant knot that you must try and unravel. Someone else made it and
-they're not always around to help explain. It's easy to get overwhelmed!
+- Discuss how process can be used with entire Ruby classes with many methods
+- Point out some changes (classes input is in `initialize`, output based on method)
 
-This problem is common. Even code that we've written _ourselves_ can seem
-foreign if enough time has passed, making it difficult to jump back into old
-projects. By applying a process, however, we can quickly push past the point
-where we might get overwhelmed, separate out code that we understand and drill down on code that we is unclear.
+## Discuss Process for Ruby Classes
 
-In this lesson, we will show code examples and discuss a process for approaching and interpreting them.
+- Identify inputs of a class (initialize)
+- Identify outputs of a class (method specific, won't apply at a class level)
+- Added step:
+  - Choose the which method to walk through first. If not clear, start with the largest
+- Separate actions within an existing method
+- Distinguish clear vs opaque portions
+- Walk through method
+- Drill down and repeat process on any opaque portions or helper methods
+- Summarize method purpose
+- Infer relationships between methods
 
-### Identify methods for interpreting unfamiliar code
+## Demonstrate Process with Example
 
-This process aims to take a blob of unfamiliar code and systematically break it
-down into discrete, understandable chunks.
+- Use code snippet example of Ruby class with `initialize` and class and instance methods
 
-# TO DO - Incorporate Flatiron Process language from Week 1
+#### Identify inputs of a class
 
-Process something like :
+- First the class's initialize
 
-1.  Identify inputs - what data type is it? how many inputs? how are they related?
-2.  Identify outputs - is it clear what the output of the method is supposed to be? can you test it with a few of your own inputs and predict what the output will be? Maybe there is no output at all! Why? The purpose of a method can often be determined by what it returns
-3.  Separate out distinct 'actions' within the function
-4.  Distinguish what actions within the function are clear and what are opaque.
+#### Identify outputs of a class (method specific)
 
-    **Clear** actions are sections within a function that are well understood. Examples: Variable assignment, simple data manipulation (like Strings), logs, prints, etc.. things that have an obvious purpose.
+- Won't really apply to the class level
 
-    **Opaque** actions are sections where their purpose and is not immediately understood. Examples include calls to other methods, where the specific code is written somewhere else; 'built in' Ruby class methods or gem methods we are unfamiliar with; code blocks like loops/enumerables
+#### Choose Which Method to Walk Through
 
-5.  Walk through the code linearly until you reach the first opaque portion. Use comments to keep track of how inputs are being used. Keep an idea of the inputs in your mind - if you can't clearly see how those inputs are being used or manipulated in the code, you've likely reached an opaque portion.
+- Look for a method that uses class variables or other actions from the initialize method
+- If not clear, start with the largest method in the class
+- Restart steps for the specific method
 
-6.  Apply steps 1-6 on any opaque code you encounter until you've reached the end of the method you started with
+#### Identify Inputs of the Method
 
-    - For calls to other methods in the app, this would mean finding the method in question and following the same process until the code is better understood. This may mean going deeper into further nested method calls.
-    - For method calls on gems or built in Ruby classes, the code isn't available to read, but we can still identify inputs and outputs. We can also often fall back on documentation and Google for these to better understand them
-    - For blocks of code - identify I/Os of the block (i.e. loops will maybe have an index and/or a set of values from an array). Walk through code with inputs in mind to see how they are manipulated.
+- Inputs may not be present in a method
+  Questions To Ask Here:
+  what data type is it? how many inputs? how are they related?
 
-When you've reached the end of any section, following these steps you should be able summarize the purpose of the method and how the inputs are used to get the desired output.
+#### Identify Outputs of the Method
 
-Let's look at each step while applying this process to an example to see how it works.
+Questions To Ask Here:
 
-### Applying the Process to a Simple Function
+Is it clear what the output of the method is supposed to be? can you test it with a few of your own inputs and predict what the output will be? Maybe there is no output at all! Why? The purpose of a method can often be determined by what it returns
 
-- Use process on a function with a simple "implementation" that may be obvious to most students
-- Introduce example snippet
+#### Separate Actions within an Existing Method
 
-#### Identify Inputs
+#### Distinguish Clear vs Opaque Portions
 
-- Confirm inputs and ask questions
+- Opaque portions now include helper and private methods in Ruby classes
 
-#### Identify Outputs
+#### Walk Through Method
 
-- Confirm outputs and ask questions
+- Use dummy data and comments to step through method until the first opaque portion
 
-#### Separate Out Distinct Actions Within the Function
+#### Repeat Process on Opaque Portions
 
-- Space function in snippet to make distinct actions clear
+- Repeat steps in brief for a private method and an unfamiliar block of code
+- Continue to walk through code after
 
-#### Distinguish Clear and Opaque Actions
+#### Summarize Method Purpose
 
-- Identify all clear actions at first glance - use variable assignments, logs, string manipulation
+#### Infer relationships between methods
 
-#### Walk Through Code
-
-- Start by using dummy input values and adding them to snippet in a comment
-
-- Get through initial 'clear' actions and add comment at end displaying how dummy inputs may have changed
-
-#### Apply Steps to Opaque Code
-
-- Reapply process to portion of function that is 'opaque' (a block of code or enumerable)
-
-### Applying the Process to a Complex Function
-
-- Reinforce concept with more complicated example
-
-## Infer Relationships Between Functions
-
-Discuss how this process works over many related functions using a procedural example
+- Take time to distinguish which methods you've now walked through and how they relate
 
 ## Conclusion
 
-Emphasize importance of reading to become a better writer
-Reiterate process
+- Identify any methods you have not walk through
+- Repeat process until all methods are understood
 
 ## Resources
