@@ -1,82 +1,139 @@
-# Reading Object Oriented Code
+# Reading Complex Object Oriented Code
 
 ## Learning Goals
 
-- Recognize how process for unfamiliar code can be used with classes in Ruby
-- Apply process to example class
+- Identify methods for interpreting unfamiliar object oriented code
+- Identify the inputs and outputs of a `Class`
+- Distinguish relationships between methods within an existing `Class`
 
 ## Introduction
 
-- Discuss how process can be used with entire Ruby classes with many methods
-- Point out some changes (classes input is in `initialize`, output based on method)
+In this lesson, we're going to walk through a process for understanding
+object-oriented code. Before we do, though, just to review: what is the
+difference between procedural and object-oriented programming again?
 
-## Discuss Process for Ruby Classes
+> In procedural programming, we have data and we have the procedures or
+> instructions for operating on that data. In procedural programming, data and
+> procedures, or instructions, are two separate things. In object-oriented
+> programming, we have units of code that contain both data and instructions,
+> such that an "object" operates on its own data structure.
 
-- Identify inputs of a class (initialize)
-- Identify outputs of a class (method specific, won't apply at a class level)
-- Added step:
-  - Choose the which method to walk through first. If not clear, start with the largest
-- Separate actions within an existing method
-- Distinguish clear vs opaque portions
-- Walk through method
-- Drill down and repeat process on any opaque portions or helper methods
-- Summarize method purpose
-- Infer relationships between methods
+In our previous lesson on reading code, we looked at code for a simple number
+guessing game and followed a process to turn the unknown into the known. The
+process, summarized, was:
 
-## Demonstrate Process with Example
+1.  Identify where to start
+2.  Identify inputs and outputs
+3.  Distinguish and separate which parts of the code are **clear** and which are
+    **opaque**
+4.  From your starting point, walk through the code linearly until your reach
+    opaque code.
+5.  Repeat steps 2-4 on the opaque code
+6.  Continue through all opaque code until the end
 
-- Use code snippet example of Ruby class with `initialize` and class and instance methods
+This works just fine for procedural code, but can we use it on object-oriented
+code as well? Yes! With a few notes. Since we've already gone through
+the process in detail, this time, we'll mainly focus on some of the differences
+to the process when approaching object-oriented code.
 
-#### Identify inputs of a class
+In `lib`, there is an object-oriented game. Your task is to follow the process
+above to gain an understanding of the classes and their relationships. Then,
+using what've you've learned, fill in the methods founds in `answers.rb`.
 
-- First the class's initialize
+## Identify Where to Start
 
-#### Identify outputs of a class (method specific)
+When trying to understand procedural code, figuring out where to start takes a
+few quick steps:
 
-- Won't really apply to the class level
+A. Find a method in which other methods are called.
+B. Check to see if this method is called in any _other_ method
+C. If true, repeat step B for the new method. If false, start process
 
-#### Choose Which Method to Walk Through
+In object-oriented Ruby, the steps are slightly different. Instead of
+stand-alone methods, related methods and data are organized together. Its
+possible not all methods are relevant. Given a group of related `Class`es,
+however, its likely that there is some point in the code where primary actions
+_begin_. One key indicators is that `Class`es often setup of instance and/or
+class variables when first initialized. So to modify our steps, even starting
+from a random `Class`:
 
-- Look for a method that uses class variables or other actions from the initialize method
-- If not clear, start with the largest method in the class
-- Restart steps for the specific method
+A. Find a method within the `Class` in which other instance variables are setup. Often, this is `initialize`.
+B. Check to see if this `Class` is called in any _other_ `Class`es
+C. If true, repeat steps A and B for the new `Class`. If false, start process
 
-#### Identify Inputs of the Method
+Many `Class`es in object-oriented programming serve a singular purpose - they
+may just be a way to store some specific piece data along with a few methods for
+accessing and changing that data. These are often secondary `Class`es -
+primarily used in other `Class`es and are typically easy to spot. Whatever
+'parent' `Class` handles the application logic that utilizes these secondary
+`Class`es is likely the best place to start.
 
-- Inputs may not be present in a method
-  Questions To Ask Here:
-  what data type is it? how many inputs? how are they related?
+## Identify Inputs and Outputs
 
-#### Identify Outputs of the Method
+In code following standard Ruby `Class` syntax inputs will most often be found
+in the `initialize` method. Inputs, however, can be passed in to any method:
 
-Questions To Ask Here:
+```ruby
+class Person
 
-Is it clear what the output of the method is supposed to be? can you test it with a few of your own inputs and predict what the output will be? Maybe there is no output at all! Why? The purpose of a method can often be determined by what it returns
+  @@people = []
 
-#### Separate Actions within an Existing Method
+  # Used to create a new instance of Person with default values each the argument
+  def initialize(first_name = "John", last_name = "Doe")
+    @first_name = first_name
+    @last_name = last_name
+    @@people << self
+  end
 
-#### Distinguish Clear vs Opaque Portions
+  # A class method for searching names of all instances of Person with a String argument
+  def self.find_by_name(search_string)
+    @@people.select { |person| person.full_name.match(search_string) }
+  end
 
-- Opaque portions now include helper and private methods in Ruby classes
+  # An instance method with two String arguments
+  def change_name(first_name, last_name)
+    @first_name = first_name
+    @last_name = last_name
+    full_name
+  end
 
-#### Walk Through Method
+  # An instance method with no arguments, but includes instance variables
+  def full_name
+    @first_name + " " + @last_name
+  end
+end
+```
 
-- Use dummy data and comments to step through method until the first opaque portion
+Instance and class variables, while not explicitly passed in as an argument, can
+often be considered inputs in our process - unless they are being initialized,
+methods using these values are accessing and possibly changing existing values.
 
-#### Repeat Process on Opaque Portions
+Equally, instance and class variables are often part of the 'output', the result
+of methods. In `change_name`, for instance, `@first_name` and `@last_name` are
+both modified, then a second method `full_name` is returned. The `full_name`
+uses the instance variables we _just_ set, returning a String of the two
+variables combined.
 
-- Repeat steps in brief for a private method and an unfamiliar block of code
-- Continue to walk through code after
+## Instructions
 
-#### Summarize Method Purpose
-
-#### Infer relationships between methods
-
-- Take time to distinguish which methods you've now walked through and how they relate
+Apply the process for understanding complex code to the `Class`es in `lib`,
+then provide return values for the methods in `answers.rb`. Run `learn` to
+confirm your answers.
 
 ## Conclusion
 
-- Identify any methods you have not walk through
-- Repeat process until all methods are understood
+Whether your interest is joining a team of developers, contributing to the open
+source community, or even just building your own applications, being able to
+read and understand code is a necessary skill. We are, in effect, teaching our
+brains a new language. The benefits are huge, but it can be intimidating.
+
+Applying a process, approaching code in a systematic way, provides a way for us
+to build a mental model of an application. And once you have a clear idea of how
+something works, you can change it.
 
 ## Resources
+
+-[Lesson on Procedural vs Object Oriented Ruby][pvoo]
+
+[pvoo]: https://learn.co/lessons/procedural-vs-oo-ruby
+[record separator characters]: https://ruby-doc.org/core-2.2.0/String.html#method-i-chomp
