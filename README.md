@@ -110,6 +110,20 @@ both modified, then a second method `full_name` is returned. The `full_name`
 uses the instance variables we _just_ set, returning a String of the two
 variables combined.
 
+Oh, that's right, we were looking for the implementation of `full_name`. We found
+it. It depends _not_ on inputs explicitly passed into the method, but rather on
+inputs that were set (and presumably haven't been changed) when the `class` was
+instantiated. Fortunately there's no _opaque_ code here. We're doing `String`
+addition (`+`) and our output is the result of that `String` addition per
+step 2 of our process. We've certainly mastered this bit of the `Person` class!
+
+Keep performing this process until you can understand what a `class` is doing.
+Keep in mind, if a method **_isn't_** called part of the execution of the method
+you're studying, _tune it out_. You don't need to understand 100% of a class to
+use it or even debug it. If it's not interfering in the work at hand, feel free
+to tune it out. Great developers, like great fighter pilots are experts at tuning
+out what doesn't matter so that they can be entirely focused on _what does_.
+
 ## What About Class Methods
 
 Class methods are a snap. Instead of having to look for how they were
