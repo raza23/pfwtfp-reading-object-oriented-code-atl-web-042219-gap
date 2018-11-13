@@ -110,6 +110,14 @@ both modified, then a second method `full_name` is returned. The `full_name`
 uses the instance variables we _just_ set, returning a String of the two
 variables combined.
 
+## What About Class Methods
+
+Class methods are a snap. Instead of having to look for how they were
+initialized, we can transfer our process from working with procedural code.
+Class methods most often don't have any pre-existing state, or at most only a
+single class variable (`@@like_this`). All you have to do is find the class
+method's definition in the `class` and your procedural process will work.
+
 ## Instructions
 
 Apply the process for understanding complex code to the `class`es in `lib`,
