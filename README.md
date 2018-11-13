@@ -43,9 +43,9 @@ code as well? Yes! With a few modifications.
 When trying to understand procedural code, figuring out where to start takes a
 few quick steps:
 
-A. Find a method which calls other methods
-B. Check to see if this method is called in any _other_ method
-C. If true, repeat step B for the new method. If false, start process
+A. Find a method which calls other methods  
+B. Check to see if this method is called in any _other_ method   
+C. If true, repeat step B for the new method. If false, start process  
 
 The best place to start when trying to get a handle on Object-Oriented code is
 to find a place where an _instance_ has a method called. When we see
