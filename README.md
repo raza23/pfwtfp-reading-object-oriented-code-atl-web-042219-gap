@@ -2,21 +2,25 @@
 
 ## Learning Goals
 
-- Identify methods for interpreting unfamiliar Object-Oriented code
-- Identify the inputs and outputs of a `Class`
-- Distinguish relationships between methods within an existing `Class`
+- Identify techniques for interpreting unfamiliar Object-Oriented code
+- Identify the inputs and outputs of a `class`
+- Distinguish relationships between methods within an existing `class`
 
 ## Introduction
 
 In this lesson, we're going to walk through a process for understanding
-object-oriented code. Before we do, though, just to review: what is the
-difference between procedural and object-oriented programming again?
+Object-Oriented code. Before we do, though, just to review: what is the
+difference between procedural and Object-Oriented programming again?
 
 > In procedural programming, we have data and we have the procedures or
 > instructions for operating on that data. In procedural programming, data and
-> procedures, or instructions, are two separate things. In object-oriented
-> programming, we have units of code that contain both data and instructions,
-> such that an "object" operates on its own data structure.
+> procedures, or instructions, are two separate things. Data will be passed to
+> a function, method, or _procedure_, changed, and then handed off to another
+> procedure until done. In Object-Oriented programming, we have units of code
+> that contain _both_ data and instructions, such that an "object" operates on
+> its own data structure. It will be prompted to do such an update by
+> collaborating with another object. _Instances_ of _classes_ will interact
+> upon each other (and themselves) until the code is done.
 
 In our previous lesson on reading code, we looked at code for a simple number
 guessing game and followed a process to turn the unknown into the known. The
@@ -31,47 +35,38 @@ process, summarized, was:
 5.  Repeat steps 2-4 on the opaque code
 6.  Continue through all opaque code until the end
 
-This works just fine for procedural code, but can we use it on object-oriented
-code as well? Yes! With a few notes. Since we've already gone through
-the process in detail, this time, we'll mainly focus on some of the differences
-to the process when approaching object-oriented code.
-
-In `lib`, there is an object-oriented game. Your task is to follow the process
-above to gain an understanding of the classes and their relationships. Then,
-using what've you've learned, fill in the methods founds in `answers.rb`.
+This works just fine for procedural code, but can we use it on Object-Oriented
+code as well? Yes! With a few modifications.
 
 ## Identify Where to Start
 
 When trying to understand procedural code, figuring out where to start takes a
 few quick steps:
 
-A. Find a method in which other methods are called.
+A. Find a method which calls other methods
 B. Check to see if this method is called in any _other_ method
 C. If true, repeat step B for the new method. If false, start process
 
-In object-oriented Ruby, the steps are slightly different. Instead of
-stand-alone methods, related methods and data are organized together. Its
-possible not all methods are relevant. Given a group of related `Class`es,
-however, its likely that there is some point in the code where primary actions
-_begin_. One key indicators is that `Class`es often setup of instance and/or
-class variables when first initialized. So to modify our steps, even starting
-from a random `Class`:
+The best place to start when trying to get a handle on Object-Oriented code is
+to find a place where an _instance_ has a method called. When we see
+`current_user.full_name` we can see that the _instance_, `current_user` is
+having its `full_name` method called.
 
-A. Find a method within the `Class` in which other instance variables are setup. Often, this is `initialize`.
-B. Check to see if this `Class` is called in any _other_ `Class`es
-C. If true, repeat steps A and B for the new `Class`. If false, start process
+Next, we want to find where that _instance_ was created. We can use our
+editor's find previous of `current_user` to find the place where `current_user`
+was assigned or "instantiated." We should track back to find: `current_user =
+Person.new("Xena", "Warrior-Princess")`. Because _instances_ of `class`es are
+created with initial data that they manage ("instance data") we need to know
+what the _instance_ was "born" knowing. It's sometimes handy to write this down
+on a notepad or sticky note.
 
-Many `Class`es in object-oriented programming serve a singular purpose - they
-may just be a way to store some specific piece data along with a few methods for
-accessing and changing that data. These are often secondary `Class`es -
-primarily used in other `Class`es and are typically easy to spot. Whatever
-'parent' `Class` handles the application logic that utilizes these secondary
-`Class`es is likely the best place to start.
+Now let's find the `class`'s definition of the method e.g. `full_name`
 
 ## Identify Inputs and Outputs
 
-In code following standard Ruby `Class` syntax inputs will most often be found
-in the `initialize` method. Inputs, however, can be passed in to any method:
+In code following, standard Ruby `class` syntax inputs will most often be found
+in the `initialize` method. Inputs, however, can _also_ be passed in to any
+method:
 
 ```ruby
 class Person
@@ -104,9 +99,10 @@ class Person
 end
 ```
 
-Instance and class variables, while not explicitly passed in as an argument, can
-often be considered inputs in our process - unless they are being initialized,
-methods using these values are accessing and possibly changing existing values.
+Instance and class variables, while not explicitly passed in as an argument to the method, can
+often be considered inputs in our process. Methods in the class have "free"
+access to the instance variables, so it's useful to treat them as "invisible"
+inputs.
 
 Equally, instance and class variables are often part of the 'output', the result
 of methods. In `change_name`, for instance, `@first_name` and `@last_name` are
@@ -116,7 +112,7 @@ variables combined.
 
 ## Instructions
 
-Apply the process for understanding complex code to the `Class`es in `lib`,
+Apply the process for understanding complex code to the `class`es in `lib`,
 then provide return values for the methods in `answers.rb`. Run `learn` to
 confirm your answers.
 
