@@ -2,7 +2,7 @@
 
 ## Learning Goals
 
-- Identify methods for interpreting unfamiliar object oriented code
+- Identify methods for interpreting unfamiliar Object-Oriented code
 - Identify the inputs and outputs of a `Class`
 - Distinguish relationships between methods within an existing `Class`
 
